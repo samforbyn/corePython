@@ -1,18 +1,19 @@
 """Restaurant rating lister."""
-import sys
-import random
+import os, sys, random
 
 # put your code here
 def main():
     my_dict = dict()
+    print(os.listdir("./Restaurants"))
+    file = input("Choose a file to work with\nEnter file name exactly!:\n")
 
-    def read_makeDict(print):
-        s = open('core-python/scores.txt', "r")
+    def read_makeDict(shouldPrint):
+        s = open(f'./Restaurants/{file}', "r")
         lines = s.readlines()
         for x in lines:
             y = x.strip().split(":")
             my_dict[y[0]] = y[1]
-        if print:
+        if shouldPrint:
             sortAndPrint()
 
     def sortAndPrint():
@@ -57,7 +58,7 @@ def main():
         rateCheck() 
 
     def giveChoices():
-        choice = input("Do you want to 'SEE', 'ADD', 'RANDOM', 'UPDATE' or 'QUIT'? Enter choice here:\n")
+        choice = input("Do you want to 'SEE', 'ADD', 'RANDOM', 'UPDATE', 'LIST' or 'QUIT'? Enter choice here:\n")
         if choice == "SEE":
             read_makeDict(True)
             giveChoices()
@@ -72,6 +73,8 @@ def main():
             giveChoices()
         elif choice == "QUIT":
             sys.exit("Quitting... Good.py, my friend!")
+        elif choice == "LIST":
+            print(os.listdir("./Restaurants"))
         else:
             print("Please enter a valid keyword:\n")
             giveChoices()
